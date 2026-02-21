@@ -1,8 +1,5 @@
-"""
-CyberShield AI - Deployment & Configuration Guide
-Multi-environment support for development, staging, and production
-"""
-
+import utils.transport
+import utils.session
 import os
 from dotenv import load_dotenv
 from dataclasses import dataclass
@@ -95,16 +92,6 @@ class ConfigManager:
     
     @staticmethod
     def get_config(environment: str = None) -> Config:
-        """
-        Get configuration for specified environment
-        
-        Args:
-            environment: 'development', 'staging', 'production'
-                        If None, uses ENVIRONMENT env variable
-        
-        Returns:
-            Config object with appropriate settings
-        """
         env = environment or os.getenv('ENVIRONMENT', 'development').lower()
         
         configs = {
@@ -126,7 +113,7 @@ class ConfigManager:
     
     @staticmethod
     def print_config(config: Config) -> None:
-        """Pretty print configuration"""
+        """Print configuration"""
         print(f"\n{'='*60}")
         print(f"CyberShield AI - {config.ENVIRONMENT.upper()} Configuration")
         print(f"{'='*60}\n")
